@@ -132,13 +132,15 @@
     <div id="sparkles"></div>
     <div class="container" id="sender">
         <h1>💖 Create Your Love Letter 💖</h1>
-        <textarea id="letterText" rows="10" placeholder="Write your heartfelt message here... (keep under 500 characters for link generation)"></textarea>
+        <textarea id="letterText" rows="10" placeholder="Write your heartfelt message here... (keep under 200 characters for shorter links)"></textarea>
         <select id="musicSelect">
             <option value="">Choose background music</option>
             <option value="builtin-blue">Built-in: Blue by Yung Kai</option>
             <option value="upload">Upload Custom MP3</option>
+            <option value="url">Paste Custom MP3 URL</option>
         </select>
         <input type="file" id="musicFile" accept="audio/*" style="display: none;" placeholder="Choose your custom music file (MP3 from your folder)">
+        <input type="url" id="musicUrl" style="display: none;" placeholder="Paste direct MP3 URL (e.g., from YouTube to MP3)">
         <button onclick="generateLink()">Generate Shareable Link</button>
         <p id="linkOutput"></p>
     </div>
@@ -201,13 +203,16 @@
             }
         }
 
-        // Show/hide file input based on select
+        // Show/hide inputs based on select
         document.getElementById('musicSelect').addEventListener('change', function() {
             const fileInput = document.getElementById('musicFile');
+            const urlInput = document.getElementById('musicUrl');
+            fileInput.style.display = 'none';
+            urlInput.style.display = 'none';
             if (this.value === 'upload') {
                 fileInput.style.display = 'block';
-            } else {
-                fileInput.style.display = 'none';
+            } else if (this.value === 'url') {
+                urlInput.style.display = 'block';
             }
         });
 
@@ -219,8 +224,8 @@
                 alert('Please write a letter!');
                 return;
             }
-            if (letter.length > 500) {
-                alert('Letter is too long. Please shorten it to under 500 characters to avoid link generation errors.');
+            if (letter.length > 200) { // Reduced to 200 for shorter links
+                alert('Letter is too long. Please shorten it to under 200 characters for shorter links.');
                 return;
             }
             if (!musicChoice) {
@@ -228,16 +233,15 @@
                 return;
             }
             if (musicChoice === 'builtin-blue') {
-                // Updated to a working MP3 URL (free Valentine's song; replace with actual "Blue by Yung Kai" if found)
-                music = 'https://www.soundjay.com/misc/sounds/love-song-01.mp3'; // Example free MP3; search for "Blue by Yung Kai MP3" and replace
+                music = 'https://www.soundjay.com/misc/sounds/love-song-01.mp3'; // Short URL
             } else if (musicChoice === 'upload') {
                 const musicFile = document.getElementById('musicFile').files[0];
                 if (!musicFile) {
                     alert('Please select a music file!');
                     return;
                 }
-                if (musicFile.size > 2 * 1024 * 1024) {
-                    alert('File is too large. Please use a smaller MP3 (under 2MB) or compress it.');
+                if (musicFile.size > 1 * 1024 * 1024) { // Reduced to 1MB for shorter links
+                    alert('File is too large. Please use a smaller MP3 (under 1MB) or paste a URL instead.');
                     return;
                 }
                 const reader = new FileReader();
@@ -250,6 +254,12 @@
                 };
                 reader.readAsDataURL(musicFile);
                 return; // Wait for reader
+            } else if (musicChoice === 'url') {
+                music = document.getElementById('musicUrl').value.trim();
+                if (!music) {
+                    alert('Please paste a music URL!');
+                    return;
+                }
             }
             finalizeLink(letter, music);
         }
@@ -259,8 +269,13 @@
                 const data = btoa(JSON.stringify({ letter, music }));
                 const baseUrl = 'https://fernandezcassandratereza-art.github.io/valentines/';
                 const link = `${baseUrl}?data=${data}`;
+                if (link.length > 2000) {
+                    alert('Link is too long! Shorten the letter or use a URL for music. Try tinyurl.com or goo.gl to shorten it.');
+                    document.getElementById('linkOutput').innerHTML = `Link too long: ${link.substring(0, 100)}... (Use a shortener)`;
+                    return;
+                }
                 document.getElementById('linkOutput').innerHTML = `Share this link: <a href="${link}" target="_blank">${link}</a>`;
-                alert('Link generated successfully! Share it now.');
+                alert('Link generated successfully! If long, use tinyurl.com to shorten.');
             } catch (e) {
                 alert('Error generating link. Try shortening the letter.');
             }
@@ -377,11 +392,4 @@
         function moveBasketTouch(e) {
             e.preventDefault();
             const rect = canvas.getBoundingClientRect();
-            const touch = e.touches[0];
-            basket.x = touch.clientX - rect.left - basket.width / 2;
-            basket.x = Math.max(0, Math.min(canvas.width - basket.width, basket.x));
-        }
-        function replayGame() { startGame(); }
-    </script>
-</body>
-</html>
+            const touch = e
