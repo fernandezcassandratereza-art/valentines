@@ -135,7 +135,7 @@
         <textarea id="letterText" rows="10" placeholder="Write your heartfelt message here... (keep under 100 characters for short links)"></textarea>
         <select id="musicSelect">
             <option value="">Choose background music</option>
-            <option value="builtin-blue">Built-in: Blue by Yung Kai</option>
+            <option value="builtin-araw-araw">Built-in: Araw Araw by Ben & Ben</option>
             <option value="url">Paste Custom MP3 URL</option>
         </select>
         <input type="url" id="musicUrl" style="display: none;" placeholder="Paste direct MP3 URL (e.g., from YouTube to MP3)">
@@ -215,7 +215,7 @@
                 alert('Please write a letter!');
                 return;
             }
-            if (letter.length > 100) { // Reduced to 100 for very short links
+            if (letter.length > 100) {
                 alert('Letter is too long. Please shorten it to under 100 characters.');
                 return;
             }
@@ -223,8 +223,8 @@
                 alert('Please choose music!');
                 return;
             }
-            if (musicChoice === 'builtin-blue') {
-                music = 'https://www.soundjay.com/misc/sounds/love-song-01.mp3'; // Short URL
+            if (musicChoice === 'builtin-araw-araw') {
+                music = 'https://limewire.com/d/He5hk#t11kiQL5et'; // Direct link for "Araw Araw" by Ben & Ben
             } else if (musicChoice === 'url') {
                 music = document.getElementById('musicUrl').value.trim();
                 if (!music) {
@@ -256,7 +256,7 @@
         function playMusic() {
             const audio = document.getElementById('audioPlayer');
             if (audio.src) {
-                audio.play().catch(e => alert('Unable to play music. Check if the URL is valid.'));
+                audio.play().catch(e => alert('Unable to play music. Check if the URL is valid or replace with a working MP3 URL.'));
             } else {
                 alert('No music loaded.');
             }
