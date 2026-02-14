@@ -256,8 +256,7 @@
         function finalizeLink(letter, music) {
             try {
                 const data = btoa(JSON.stringify({ letter, music }));
-                // Replace with your actual hosted URL (e.g., https://yourusername.github.io/valentine/)
-                const baseUrl = 'https://your-hosted-url.com/for-you'; // Update this!
+                const baseUrl = 'https://fernandezcassandratereza-art.github.io/valentines/';
                 const link = `${baseUrl}?data=${data}`;
                 document.getElementById('linkOutput').innerHTML = `Share this link: <a href="${link}" target="_blank">${link}</a>`;
                 alert('Link generated successfully! Share it now.');
