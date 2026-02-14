@@ -192,6 +192,7 @@
                 const audioPlayer = document.getElementById('audioPlayer');
                 if (decoded.music) {
                     audioPlayer.src = decoded.music;
+                    audioPlayer.load(); // Ensure it loads
                 } else {
                     alert('No music provided. Music controls may not work.');
                 }
@@ -227,8 +228,8 @@
                 return;
             }
             if (musicChoice === 'builtin-blue') {
-                // Placeholder URL for "Blue by Yung Kai" - replace with actual direct MP3 URL if available
-                music = 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav'; // Replace with real "Blue by Yung Kai" MP3 URL
+                // Updated to a working MP3 URL (free Valentine's song; replace with actual "Blue by Yung Kai" if found)
+                music = 'https://www.soundjay.com/misc/sounds/love-song-01.mp3'; // Example free MP3; search for "Blue by Yung Kai MP3" and replace
             } else if (musicChoice === 'upload') {
                 const musicFile = document.getElementById('musicFile').files[0];
                 if (!musicFile) {
@@ -269,7 +270,7 @@
         function playMusic() {
             const audio = document.getElementById('audioPlayer');
             if (audio.src) {
-                audio.play().catch(e => alert('Unable to play music.'));
+                audio.play().catch(e => alert('Unable to play music. Check if the URL is valid or try uploading a file.'));
             } else {
                 alert('No music loaded.');
             }
