@@ -3,371 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Love Letter</title>
+    <title>The Genesis of Our Relationship</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        /* Global Styles */
+        html {
+            scroll-behavior: smooth;
+        }
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #e0f7fa, #fce4ec, #f3e5f5);
-            color: #333;
+            font-family: 'Crimson Text', serif;
+            background-color: #f5f1e8; /* Cream background */
+            color: #5d4e37; /* Brown text */
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
-            position: relative;
-        }
-        .sparkle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: radial-gradient(circle, #fff, #ffb3ba);
-            border-radius: 50%;
-            animation: float 6s infinite ease-in-out;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
-            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+            line-height: 1.6;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text fill="%23d4c5a9" font-size="20" y="50%">✦</text></svg>'); /* Subtle gold star texture */
+            background-repeat: repeat;
+            background-size: 50px 50px;
+            background-blend-mode: multiply; /* To make texture subtle */
         }
         .container {
             max-width: 800px;
-            margin: 50px auto;
+            margin: 0 auto;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
         }
-        .container:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            color: #8b6f47; /* Soft gold */
         }
         h1 {
-            text-align: center;
-            color: #ff69b4;
             font-size: 2.5em;
+            text-align: center;
             margin-bottom: 20px;
         }
-        textarea, select, input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 2px solid #ffb3ba;
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 2px solid #d4c5a9; /* Beige border */
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #ffffff; /* Solid white for better visibility */
+            border: 1px solid #d4c5a9;
             border-radius: 10px;
-            font-size: 1em;
-            transition: border-color 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        textarea:focus, select:focus, input:focus {
-            border-color: #ff69b4;
-            outline: none;
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-        button {
-            background: linear-gradient(45deg, #ff69b4, #ffb3ba);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
+        .button {
+            display: inline-block;
+            background-color: #8b6f47;
+            color: #f5f1e8;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
             cursor: pointer;
-            font-size: 1em;
-            transition: all 0.3s ease;
-            margin: 10px 5px;
+            border: none;
+            margin: 5px;
         }
-        button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(255,105,180,0.4);
+        .button:hover {
+            background-color: #a0855b;
         }
-        .letter {
-            background: #fce4ec;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-            white-space: pre-wrap;
-            font-style: italic;
-            box-shadow: inset 0 0 10px rgba(255,105,180,0.2);
+        .keypad-button {
+            width: 50px;
+            height: 50px;
+            font-size: 1.2em;
+            margin: 5px;
+            border-radius: 50%;
+            background-color: #d4c5a9;
+            color: #5d4e37;
+            border: 2px solid #8b6f47;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .game-container {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            z-index: 1000;
-            max-width: 400px;
-            width: 90%;
+        .keypad-button:hover {
+            background-color: #8b6f47;
+            color: #f5f1e8;
         }
-        canvas {
-            border: 2px solid #ffb3ba;
+        .intro {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: rgba(139, 111, 71, 0.2); /* Increased opacity for better visibility */
             border-radius: 10px;
-            display: block;
+            margin-bottom: 40px;
+        }
+        .intro p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .password-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .password-box {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #d4c5a9;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.5em;
+            font-family: 'Crimson Text', serif;
+            background-color: #ffffff;
+            pointer-events: none; /* Prevent direct input */
+        }
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            justify-items: center;
+            margin-bottom: 20px;
+            max-width: 200px;
             margin: 0 auto;
         }
-        .controls {
+        .title-page {
             text-align: center;
-            margin-top: 10px;
+            padding: 40px 20px;
+            background-color: #ffffff; /* Solid white for better contrast */
+            border: 2px solid #d4c5a9;
+            border-radius: 10px;
+            margin-bottom: 40px;
         }
-        .music-controls {
+        .title-page h1 {
+            margin-bottom: 20px;
+        }
+        .title-page p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+        .share-section {
             text-align: center;
-            margin: 20px 0;
+            margin: 40px 0;
         }
-        audio {
-            width: 100%;
-            max-width: 300px;
+        .share-section input {
+            width: 70%;
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #d4c5a9;
+            border-radius: 5px;
+            font-family: 'Crimson Text', serif;
         }
         footer {
             text-align: center;
-            margin-top: 50px;
-            color: #ff69b4;
-            font-size: 1.2em;
-            text-shadow: 0 0 10px #ffb3ba;
+            padding: 20px;
+            background-color: #8b6f47;
+            color: #f5f1e8;
+            font-style: italic;
+            border-top: 2px solid #d4c5a9;
         }
-        @media (max-width: 600px) {
-            h1 { font-size: 2em; }
-            .container { margin: 20px; padding: 15px; }
-            .game-container { width: 95%; }
+        /* Hidden content initially */
+        .hidden-content {
+            display: none;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .intro {
+                padding: 30px 10px;
+            }
+            .password-box {
+                width: 35px;
+                height: 35px;
+                font-size: 1.2em;
+            }
+            .keypad-button {
+                width: 40px;
+                height: 40px;
+                font-size: 1em;
+            }
+            .share-section input {
+                width: 80%;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="sparkles"></div>
-    <div class="container" id="sender">
-        <h1>💖 Create Your Love Letter 💖</h1>
-        <textarea id="letterText" rows="10" placeholder="Write your heartfelt message here... (keep under 100 characters for short links)"></textarea>
-        <select id="musicSelect">
-            <option value="">Choose background music</option>
-            <option value="builtin-araw-araw">Built-in: Araw Araw by Ben & Ben</option>
-            <option value="url">Paste Custom MP3 URL</option>
-        </select>
-        <input type="url" id="musicUrl" style="display: none;" placeholder="Paste direct MP3 URL (e.g., from YouTube to MP3)">
-        <button onclick="generateLink()">Generate Shareable Link</button>
-        <p id="linkOutput"></p>
-    </div>
-    <div class="container" id="recipient" style="display: none;">
-        <h1>💌 Your Love Letter 💌</h1>
-        <div class="letter" id="displayLetter"></div>
-        <div class="music-controls">
-            <button onclick="playMusic()">Play Music</button>
-            <button onclick="pauseMusic()">Pause</button>
-            <button onclick="stopMusic()">Stop</button>
-            <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5" onchange="setVolume()">
+    <div class="container">
+        <!-- Landing Intro Section -->
+        <section class="intro">
+            <h1>Welcome to My Heartfelt Narrative</h1>
+            <p>Dear reader, in the quiet moments of reflection, stories of love unfold like delicate petals. This is my personal journey, shared with sincerity and warmth. Embark on this tale of connection and discovery.</p>
+            <div class="password-container">
+                <input type="text" class="password-box" id="digit1" value="♥" readonly>
+                <input type="text" class="password-box" id="digit2" value="♥" readonly>
+                <input type="text" class="password-box" id="digit3" value="♥" readonly>
+                <input type="text" class="password-box" id="digit4" value="♥" readonly>
+                <input type="text" class="password-box" id="digit5" value="♥" readonly>
+                <input type="text" class="password-box" id="digit6" value="♥" readonly>
+            </div>
+            <div class="keypad">
+                <button class="keypad-button" onclick="enterDigit('1')">1</button>
+                <button class="keypad-button" onclick="enterDigit('2')">2</button>
+                <button class="keypad-button" onclick="enterDigit('3')">3</button>
+                <button class="keypad-button" onclick="enterDigit('4')">4</button>
+                <button class="keypad-button" onclick="enterDigit('5')">5</button>
+                <button class="keypad-button" onclick="enterDigit('6')">6</button>
+                <button class="keypad-button" onclick="enterDigit('7')">7</button>
+                <button class="keypad-button" onclick="enterDigit('8')">8</button>
+                <button class="keypad-button" onclick="enterDigit('9')">9</button>
+                <button class="keypad-button" onclick="enterDigit('0')">0</button>
+                <button class="keypad-button" onclick="clearPassword()">Clear</button>
+                <button class="keypad-button" onclick="checkPassword()">♥</button>
+            </div>
+        </section>
+
+        <!-- Hidden Content: Header, Title Page, Main Sections, Share, Footer -->
+        <div class="hidden-content" id="main-content">
+            <!-- Header Section -->
+            <header>
+                <h1>The Genesis of Our Relationship</h1>
+            </header>
+
+            <!-- Title Page Section -->
+            <section id="title-page" class="title-page">
+                <h1>The Genesis of Our Relationship: A Personal Narrative Study</h1>
+                <p>By<br>Cassandra Tereza S. Fernandez</p>
+                <p>Date<br>February 15, 2026</p>
+            </section>
+
+            <!-- Main Content Sections -->
+            <section class="section">
+                <h2>Introduction</h2>
+                <p>In the tapestry of life, relationships often emerge from the most unexpected threads, weaving together moments of vulnerability, courage, and joy. This chapter delves into the personal narrative of how my boyfriend, Matt Richmond G. Reduca, and I embarked on our journey together. Drawing from my own reflections, I aim to explore the emotional underpinnings of our story, presenting it as a heartfelt account while adhering to a structured academic framework. This narrative is not merely a recounting of events but a sincere exploration of the human heart's capacity for connection. By examining the sequence of our meeting and the subsequent developments, I seek to illuminate the authenticity of young love in a high school setting, emphasizing the courage it takes to express and reciprocate feelings.</p>
+            </section>
+
+            <section class="section">
+                <h2>Background of the Study</h2>
+                <p>The context of our relationship is rooted in the vibrant yet challenging environment of Don Carlos National High School, a place where students navigate the complexities of adolescence amidst academic pursuits and social interactions. High school, as a microcosm of society, often serves as the backdrop for formative experiences, including the blossoming of romantic interests. My name is Cassandra Tereza S. Fernandez, and I am a student who, like many others, found herself grappling with the flutter of emotions that accompany a crush. Matt Richmond G. Reduca, my boyfriend, shares this space, embodying qualities that drew me in from the start. This background sets the stage for understanding how a seemingly ordinary school day on March 19 could spark the beginning of something profound. Our story unfolds within this communal setting, highlighting the role of shared environments in fostering personal connections.</p>
+            </section>
+
+            <section class="section">
+                <h2>Narrative Discussion</h2>
+                <p>The story begins on March 19, a day etched in my memory with the clarity of a cherished photograph. It was at Don Carlos National High School where our paths first crossed, in the bustling hallways or perhaps during a shared class—details that, in hindsight, feel almost serendipitous. From the moment I laid eyes on Matt, I felt an undeniable pull, a crush that whispered of possibilities I had only dreamed about. It was not an instantaneous declaration but a quiet stirring in my heart, one that grew with each passing glance and casual conversation.</p>
+                <p>After a few days of this internal turmoil, I mustered the courage to confess my feelings to him. It was a vulnerable act, standing there with my heart laid bare, hoping against hope that he might feel the same. The weight of those words hung in the air, a testament to the bravery required in matters of the heart. To my relief and joy, his response was not one of rejection but of reciprocal interest. A few days later, he took the initiative to court me, a gesture that spoke volumes about his sincerity and respect. It was a period of gentle pursuit, filled with small acts of kindness and shared laughter, allowing our connection to deepen naturally.</p>
+                <p>Eventually, I accepted him, stepping into the role of his girlfriend with a sense of fulfillment that I had not anticipated. What started as a crush evolved into a committed relationship, one built on mutual affection and understanding. Now, after 11 months together, I reflect on how these early steps have shaped us, turning fleeting moments into a lasting bond.</p>
+            </section>
+
+            <section class="section">
+                <h2>Analysis</h2>
+                <p>Reflecting on this narrative, several emotional and psychological elements stand out, underscoring the authenticity of our relationship's inception. The initial crush represents the universal experience of infatuation, a mix of excitement and apprehension that propels individuals toward vulnerability. My confession, followed by his courtship, highlights the importance of communication and reciprocity in building trust. In an academic lens, this aligns with theories of attachment and emotional intelligence, where expressing feelings fosters deeper connections. The progression from crush to courtship to acceptance illustrates a natural developmental arc, one that emphasizes patience and mutual respect. Over 11 months, this foundation has proven resilient, suggesting that genuine beginnings lay the groundwork for enduring partnerships. Emotionally, it has taught me the value of sincerity, reminding us that love, at its core, is about embracing the unknown with an open heart.</p>
+            </section>
+
+            <section class="section">
+                <h2>Conclusion</h2>
+                <p>In concluding this chapter, I am reminded that our relationship is a testament to the beauty of taking chances in the face of uncertainty. From that fateful meeting on March 19 at Don Carlos National High School to the 11 months we have shared, our story is one of heartfelt growth and genuine connection. It serves as a personal reflection on the power of vulnerability and the joy of reciprocation. As I look forward, I carry with me the lessons learned—the courage to confess, the grace to accept, and the commitment to nurture what we have built. This narrative, while deeply personal, invites readers to ponder their own stories of love, affirming that even in the structured world of academia, the heart's truths remain profoundly human.</p>
+            </section>
+
+            <!-- Share Section -->
+            <section class="share-section">
+                <h2>Share This Story</h2>
+                <input type="text" id="share-link" value="" readonly>
+                <button class="button" onclick="copyLink()">Copy Link</button>
+            </section>
+
+            <!-- Footer -->
+            <footer>
+                Made with love by Cassandra Tereza S. Fernandez
+            </footer>
         </div>
-        <audio id="audioPlayer" controls style="display: none;"></audio>
-        <button onclick="showGame()">Play this Game</button>
     </div>
-    <div class="game-container" id="game">
-        <h2>Heart Catching Game</h2>
-        <canvas id="gameCanvas" width="300" height="400"></canvas>
-        <div class="controls">
-            <p>Score: <span id="score">0</span> | Time: <span id="timer">30</span>s</p>
-            <button onclick="startGame()">Start</button>
-            <button onclick="replayGame()" style="display: none;" id="replayBtn">Replay</button>
-        </div>
-        <button onclick="closeGame()">Close</button>
-    </div>
-    <footer>💖 Made with love by Cassandra Tereza S. Fernandez</footer>
 
     <script>
-        // Floating sparkles
-        function createSparkles() {
-            const sparklesContainer = document.getElementById('sparkles');
-            for (let i = 0; i < 20; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                sparkle.style.left = Math.random() * 100 + '%';
-                sparkle.style.animationDelay = Math.random() * 6 + 's';
-                sparklesContainer.appendChild(sparkle);
-            }
-        }
-        createSparkles();
+        let currentDigit = 0;
+        const digits = ['digit1', 'digit2', 'digit3', 'digit4', 'digit5', 'digit6'];
 
-        // URL handling
-        const urlParams = new URLSearchParams(window.location.search);
-        const data = urlParams.get('data');
-        if (data) {
-            try {
-                const decoded = JSON.parse(atob(data));
-                document.getElementById('sender').style.display = 'none';
-                document.getElementById('recipient').style.display = 'block';
-                document.getElementById('displayLetter').textContent = decoded.letter || 'No letter provided.';
-                const audioPlayer = document.getElementById('audioPlayer');
-                if (decoded.music) {
-                    audioPlayer.src = decoded.music;
-                    audioPlayer.load(); // Ensure it loads
-                } else {
-                    alert('No music provided. Music controls may not work.');
-                }
-            } catch (e) {
-                alert('Invalid link data.');
+        // Function to enter a digit
+        function enterDigit(digit) {
+            if (currentDigit < 6) {
+                document.getElementById(digits[currentDigit]).value = digit;
+                currentDigit++;
             }
         }
 
-        // Show/hide inputs based on select
-        document.getElementById('musicSelect').addEventListener('change', function() {
-            const urlInput = document.getElementById('musicUrl');
-            urlInput.style.display = this.value === 'url' ? 'block' : 'none';
-        });
-
-        function generateLink() {
-            const letter = document.getElementById('letterText').value.trim();
-            const musicChoice = document.getElementById('musicSelect').value;
-            let music = '';
-            if (!letter) {
-                alert('Please write a letter!');
-                return;
-            }
-            if (letter.length > 100) {
-                alert('Letter is too long. Please shorten it to under 100 characters.');
-                return;
-            }
-            if (!musicChoice) {
-                alert('Please choose music!');
-                return;
-            }
-            if (musicChoice === 'builtin-araw-araw') {
-                music = 'https://limewire.com/d/He5hk#t11kiQL5et'; // Direct link for "Araw Araw" by Ben & Ben
-            } else if (musicChoice === 'url') {
-                music = document.getElementById('musicUrl').value.trim();
-                if (!music) {
-                    alert('Please paste a music URL!');
-                    return;
-                }
-            }
-            finalizeLink(letter, music);
+        // Function to clear password
+        function clearPassword() {
+            digits.forEach(id => document.getElementById(id).value = '♥');
+            currentDigit = 0;
         }
 
-        function finalizeLink(letter, music) {
-            try {
-                const data = btoa(JSON.stringify({ letter, music }));
-                const baseUrl = 'https://fernandezcassandratereza-art.github.io/valentines/';
-                const link = `${baseUrl}?data=${data}`;
-                if (link.length > 1500) {
-                    alert('Link is too long! Shorten the letter or use tinyurl.com to shorten the link.');
-                    document.getElementById('linkOutput').innerHTML = `Link too long: ${link.substring(0, 100)}... (Use tinyurl.com)`;
-                    return;
-                }
-                document.getElementById('linkOutput').innerHTML = `Share this link: <a href="${link}" target="_blank">${link}</a>`;
-                alert('Link generated successfully! If long, use tinyurl.com.');
-            } catch (e) {
-                alert('Error generating link. Try shortening the letter.');
-            }
-        }
-
-        // Music controls with error handling
-        function playMusic() {
-            const audio = document.getElementById('audioPlayer');
-            if (audio.src) {
-                audio.play().catch(e => alert('Unable to play music. Check if the URL is valid or replace with a working MP3 URL.'));
+        // Function to check password and reveal content
+        function checkPassword() {
+            const password = digits.map(id => document.getElementById(id).value).join('');
+            if (password === "031925") {
+                const content = document.getElementById('main-content');
+                content.style.display = 'block';
+                // Scroll to the title page after revealing
+                setTimeout(() => {
+                    document.getElementById('title-page').scrollIntoView({ behavior: 'smooth' });
+                }, 100);
             } else {
-                alert('No music loaded.');
+                alert("opsss! mali. bleeeee!");
+                clearPassword();
             }
-        }
-        function pauseMusic() {
-            document.getElementById('audioPlayer').pause();
-        }
-        function stopMusic() {
-            const audio = document.getElementById('audioPlayer');
-            audio.pause();
-            audio.currentTime = 0;
-        }
-        function setVolume() {
-            document.getElementById('audioPlayer').volume = document.getElementById('volume').value;
         }
 
-        // Game logic
-        let canvas, ctx, basket, hearts, score, timeLeft, gameInterval, timerInterval;
-        const gravity = 0.2;
-        const bounceDamping = 0.8;
-        function showGame() { document.getElementById('game').style.display = 'block'; }
-        function closeGame() { 
-            document.getElementById('game').style.display = 'none';
-            clearInterval(gameInterval);
-            clearInterval(timerInterval);
+        // Set the share link on page load (will be set when content is revealed)
+        function setShareLink() {
+            document.getElementById('share-link').value = window.location.href;
         }
-        function startGame() {
-            canvas = document.getElementById('gameCanvas');
-            ctx = canvas.getContext('2d');
-            basket = { x: canvas.width / 2 - 25, y: canvas.height - 50, width: 50, height: 20 };
-            hearts = [];
-            score = 0;
-            timeLeft = 30;
-            document.getElementById('score').textContent = score;
-            document.getElementById('timer').textContent = timeLeft;
-            document.getElementById('replayBtn').style.display = 'none';
-            gameInterval = setInterval(updateGame, 20);
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                document.getElementById('timer').textContent = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(gameInterval);
-                    clearInterval(timerInterval);
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = '#ff69b4';
-                    ctx.font = '20px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('Game Over! 💖', canvas.width / 2, canvas.height / 2 - 20);
-                    ctx.fillText(`Final Score: ${score}`, canvas.width / 2, canvas.height / 2 + 20);
-                    document.getElementById('replayBtn').style.display = 'inline';
-                }
-            }, 1000);
-            canvas.addEventListener('mousemove', moveBasket);
-            canvas.addEventListener('touchmove', moveBasketTouch);
+
+        // Function to copy the link to clipboard
+        function copyLink() {
+            const linkInput = document.getElementById('share-link');
+            linkInput.select();
+            linkInput.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand('copy');
+            alert('Link copied to clipboard!');
         }
-        function updateGame() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            // Draw basket
-            ctx.fillStyle = '#ffb3ba';
-            ctx.fillRect(basket.x, basket.y, basket.width, basket.height);
-            // Add hearts
-            if (Math.random() < 0.02) {
-                hearts.push({ x: Math.random() * (canvas.width - 30), y: 0, size: 30, rotation: 0, vy: 0 });
-            }
-            // Update hearts
-            hearts.forEach((heart, index) => {
-                heart.vy += gravity;
-                heart.y += heart.vy;
-                heart.rotation += 0.1;
-                // Bounce off bottom
-                if (heart.y + heart.size > canvas.height) {
-                    heart.y = canvas.height - heart.size;
-                    heart.vy = -heart.vy * bounceDamping;
-                }
-                // Draw heart
-                drawHeart(heart.x, heart.y, heart.size, heart.rotation);
-                // Check collision with basket (only if falling down and near bottom)
-                if (heart.vy > 0 && heart.y + heart.size >= basket.y && heart.x < basket.x + basket.width && heart.x + heart.size > basket.x) {
-                    hearts.splice(index, 1);
-                    score++;
-                    document.getElementById('score').textContent = score;
-                }
-                // Remove off-screen hearts
-                if (heart.y > canvas.height + 50) hearts.splice(index, 1);
-            });
-        }
-        function drawHeart(x, y, size, rotation) {
-            ctx.save();
-            ctx.translate(x + size / 2, y + size / 2);
-            ctx.rotate(rotation);
-            ctx.fillStyle = '#ff69b4';
-            ctx.beginPath();
-            ctx.moveTo(0, size / 4);
-            ctx.bezierCurveTo(-size / 2, -size / 4, -size / 2, size / 2, 0, size);
-            ctx.bezierCurveTo(size / 2, size / 2, size / 2, -size / 4, 0, size / 4);
-            ctx.fill();
-            ctx.restore();
-        }
-        function moveBasket(e) {
-            const rect = canvas.getBoundingClientRect();
-            basket.x = e.clientX - rect.left - basket.width / 2;
-            basket.x = Math.max(0, Math.min(canvas.width - basket.width, basket.x));
-        }
-        function moveBasketTouch(e) {
-            e.preventDefault();
-            const rect = canvas.getBoundingClientRect();
-            const touch = e.touches[0];
-            basket.x = touch.clientX - rect.left - basket.width / 2;
-            basket.x = Math.max(0, Math.min(canvas.width - basket.width, basket.x));
-        }
-        function replayGame() { startGame(); }
+
+        // Call setShareLink when content is revealed
+        // But to keep it simple, set it on load, assuming the link is static
+        window.onload = setShareLink;
     </script>
 </body>
 </html>
